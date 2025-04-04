@@ -1,0 +1,604 @@
+/* ==================== */
+/* Базовые стили */
+/* ==================== */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #F5F7F9;
+}
+
+/* ==================== */
+/* Шапка сайта */
+/* ==================== */
+.header {
+  position: fixed; /* Фиксированное позиционирование */
+  top: 0;
+  z-index: 1000; /* Обеспечиваем поверхностное отображение */
+  width: 100%;
+  height: 64px;
+  background: #FFFFFF;
+  display: flex;
+  justify-content: space-between; /* Распределяем элементы по краям */
+  align-items: center;
+  /* Добавляем отступы по 310px слева и справа */
+  /* padding: 0 310px; */
+  box-shadow: 0px 0.5px 0px rgba(0, 0, 0, 0.15), 
+             inset 0px -0.5px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 10px 10px 0px 0px;
+}
+
+/* Логотип и кнопка блога */
+.blog_logo-btn-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none; /* Убираем подчеркивание у ссылки */
+  color: inherit; /* Наследуем цвет текста */
+  cursor: pointer; /* Изменяем курсор на указатель */
+  margin-left: 310px;
+}
+
+.admin-panel {
+  display: flex;
+  align-items: center;
+  /* flex-shrink: 0; */
+  flex-grow: 1; /* Разрешаем элементу расти */
+  justify-content: flex-end; /* Выравниваем содержимое по правому краю */
+  margin-right: 310px;
+  gap: 16px;
+}
+
+.blog-icon {
+  width: 30.25px;
+  height: 30.25px;
+}
+
+.blog-text {
+  font-size: 22px;
+  font-weight: 500;
+  color: #393939;
+}
+
+/* Добавьте стили для состояния при наведении */
+.blog_logo-btn-container:hover {
+  opacity: 0.7; /* Пример: изменяем прозрачность при наведении */
+}
+
+.blog_logo-btn-container:active {
+  opacity: 1.7; 
+  color: #010101; /* Цвет шрифта нажатии */
+  transform: scale(0.95); /* Немного уменьшает размер при нажатии */
+}
+
+/* Панель управления пользователя */
+.user-actions, .login-btn-container {
+  display: flex;
+  align-items: center;
+}
+  /* margin-right: 0px;
+  margin-left: 0px;  */
+  /* display: flex;
+  align-items: center; */
+  /* margin-right: 620px; */
+
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Общие стили для кнопок */
+.logout-btn, .create-post, .login-btn {
+  font-size: 14px;
+  font-weight: 500;
+  color: #393939;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  /* border-radius: 3px; */
+  text-decoration: none; /* Убираем подчёркивание */
+  transition: background 0.3s, color 0.3s;
+  margin: 0;
+}
+
+.create-post {
+  color: #393939;
+}
+
+.login-btn {
+  color: #393939;
+}
+
+/* Состояния кнопок */
+.logout-btn:hover {
+  /* background-color: #bb2d3b; */
+  color: #787878;
+}
+
+.logout-btn:active {
+  color: #010101; /* Цвет шрифта нажатии */
+  transform: scale(0.95); /* Немного уменьшает размер при нажатии */
+}
+
+.create-post:hover {
+  /* background-color: #286816; */
+  color: #787878;
+}
+
+.create-post:active {
+  color: #010101; /* Цвет шрифта нажатии */
+  transform: scale(0.95); /* Немного уменьшает размер при нажатии */
+}
+
+/* Информация о пользователе */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: 10px; /* Исправляю расстояния .user-actions*/
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 500;
+  color: #F04637;
+}
+
+.user-icon {
+  width: 21px;
+  height: 21px;
+}
+
+/* ======================== */
+/* Основной контент (посты) */
+/* ======================== */
+.mi-blog {
+  position: absolute;
+  width: 187px;
+  height: 52px;
+  left: calc(50% - 187px/2 + 0.5px);
+  /* top: calc(50% - 52px/2 - 380px); */
+  top: 110px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 43px;
+  line-height: 52px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.004em;
+  color: #000000;
+}
+
+.posts-container {
+  margin-top: 0;
+  padding: 222px 20px 20px; /* Отступ для фиксированного хедера */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 53px;
+}
+
+/* Карточка поста */
+.post {
+  background: #FFFFFF;
+  border-radius: 22px;
+  width: 626px;
+  padding: 21px 37px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Мета-информация поста */
+.post-meta {
+  display: flex;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 15px;
+  color: #7A7A7A;
+}
+
+.post h2 {
+  margin-top: 0;
+}
+
+/* Контент поста */
+.post-content {
+  word-break: break-word; /* Разрывает длинные слова */
+  overflow-wrap: break-word; /* Альтернативное свойство для разрыва длинных слов */
+  max-width: 626px; 
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  line-height: 28px;
+  color: #222932;
+  letter-spacing: -0.004em;
+}
+
+/* Заголовочная группа поста */
+.post-title {
+  margin-top: 0px;
+}
+
+.post-title h2 {
+  margin-top: 6px; /* Установите нужное значение */
+}
+
+/* ============================ */
+/* Основной контент (пост соло) */
+/* ============================ */
+
+/* Карточка colo поста */
+.post-solo {
+  position: relative;
+  margin-top: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 22px;
+  width: 626px;
+  padding: 37px 37px 47px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Мета-информация поста */
+.post-solo-meta {
+  display: flex;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 15px;
+  color: #7A7A7A;
+}
+
+.post-solo h2 {
+  margin-top: 0;
+}
+
+.post-solo a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.post-title-solo {
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 626px;
+  padding: 21px 37px;
+  margin-bottom: 20px;
+}
+
+.post-title-solo h2 {
+  margin-top: 12px; /* Установите нужное значение */
+}
+
+/* Заголовок поста */
+.post-title-solo h2 a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 38px;
+  color: #000000;
+  text-decoration: none;
+  letter-spacing: -0.004em;
+}
+
+/* Контент поста */
+.post-solo-content {
+  max-width: 626px;
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  line-height: 28px;
+  color: #222932;
+  letter-spacing: -0.004em;
+  word-break: break-word; /* Разрывает длинные слова */
+  overflow-wrap: break-word; /* Альтернативное свойство для разрыва длинных слов */
+  white-space: normal;
+}
+
+.post-page {
+  position: relative;
+  gap: 15px;
+}
+
+/* Кнопка назад */
+.post-solo-back {
+
+  position: absolute;
+  /* bottom: -60px; */ /* Сдвиньте кнопку немного вниз, чтобы она была под контейнером */
+  /* left: 14px; */    /* Установите отступ слева */
+}
+
+main {
+  margin-bottom: 40px; /* Установите нужное значение для отступа */
+}
+
+.back-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  text-decoration: none;
+}
+
+
+/* =========== */
+/* Пагинация   */
+/* =========== */
+.pagination {
+  padding: 20px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pagination a, .pagination span {
+  padding: 6px 12px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.pagination a {
+  color: #010101;
+  /* border: 1px solid #DDDDDD; */
+  background: #FFFFFF;
+}
+
+.pagination a:hover {
+  background: #ECECEC;
+}
+
+.pagination a:active {
+  background: #DFDFDF; /* Цвет фона при нажатии */
+  transform: scale(0.95); /* Немного уменьшает размер при нажатии */
+}
+
+.current-page {
+  background: #B7B7B7;
+  color: #FFFFFF !important;
+  /* border: 1px solid #1A0DAB; */
+}
+
+/* =========================== */
+/* Модальное окно авторизации  */
+/* =========================== */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 300px;
+  margin: 100px auto;
+  border-radius: 5px;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+/* Форма авторизации */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn-login {
+  background: #0d6efd;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* =================== */
+/* Адаптивная верстка  */
+/* =================== */
+@media (max-width: 768px) {
+  .post {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  .post h2 a {
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+
+/* ======================== */
+/* Страница создания поста  */
+/* ======================== */
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Занимает всю высоту окна */
+  margin: 0;
+}
+
+.counter {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.counter.warning {
+  color: #e74c3c;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 750px;
+  padding: 20px;
+  box-sizing: border-box;
+  
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  /* margin-left: 20px; */
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group textarea {
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  line-height: 28px;
+  color: #222932;
+  letter-spacing: -0.004em;
+  width: 100%;
+  padding: 20px; /* Увеличены отступы для курсора */
+  border: none;
+  /* border: 1px solid #ddd; */
+  border-radius: 8px;
+  box-sizing: border-box;
+  min-height: 50px; /* Минимальная высота для инпутов */
+  background: #FFFFFF; /* Белый фон */
+  box-shadow: 0px 1.69247px 6.76989px rgba(0, 0, 0, 0.14); /* Тень */
+  border-radius: 13.5398px; /* Закругленные углы */
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px; /* Минимальная высота для текстовой области */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.back-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+}
+
+.submit-button {
+  background: #fff;
+  border: none;
+  /* border: 1px solid #ddd; */
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: auto; /* Прижимает кнопку к правому краю */
+}
+
+.submit-button:hover {
+  background: #f0f0f0;
+}
+
+.submit-button:active {
+  background: #DFDFDF; /* Цвет фона при нажатии */
+  transform: scale(0.95); /* Немного уменьшает размер при нажатии */
+}
+
+.form-group small.hint {
+  color: #666;
+  font-size: 14px;
+  display: block;
+  margin-top: 5px;
+}
+
+.form-group textarea[name="content_description"] {
+  min-height: 80px;
+}
+
+.info-icon {
+  cursor: help;
+  color: #666;
+  padding-top: 0px;
+  font-size: 0.4em;
+  margin-left: 0px;
+  position:absolute;
+  margin-top: -12px;
+  display: inline-block;
+}
+
+.info-icon:hover::after {
+  content: attr(title);
+  position: static;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #7A7A7A;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 300;
+  pointer-events: none;
+}
+
+/* .info-icon:hover::before {
+  position: absolute;
+  left: 50%;
+} */
+
+/* обработка ошибок */
+.alert-error {
+  color: #dc3545;
+  padding: 10px;
+  margin: 15px 0;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  background: #f8d7da;
+}
+
+/* .counter {
+  font-size: 0.9em;
+  color: #666;
+  text-align: right;
+  margin-top: 5px;
+} */

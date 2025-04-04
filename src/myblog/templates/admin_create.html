@@ -1,0 +1,142 @@
+<!-- templates/admin_create.html -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Создание поста</title>
+  <link rel="stylesheet" href="/static/css/main.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <a href="/posts?page={{.CurrentPage}}" class="blog_logo-btn-container">
+      <img src="/static/images/blog_icon.png" alt="Blog Icon" class="blog-icon">
+      <span class="blog-text">блог</span>
+    </a>
+    <div class="admin-panel">
+      {{if .Authenticated}}
+      <div class="user-actions">
+        <form action="/logout" method="POST" class="logout-form">
+          <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+          <button type="submit" class="logout-btn">Выход</button>
+        </form>
+        <!-- {{if eq .Role "admin"}}
+        {{end}} -->
+        <div class="user-info">
+          <span class="username">{{.Username}}</span>
+          <img src="/static/images/user_icon.png" alt="User Icon" class="user-icon">
+        </div>
+      </div>
+      {{else}}
+      <div class="login-btn-container">
+        <a href="/login" class="login-btn">Личный кабинет</a>
+        <img src="/static/images/user_icon.png" alt="User Icon" class="user-icon">
+      </div>
+      {{end}}
+    </div>
+    <link rel="shortcut icon" href="/static/images/favicon_io/favicon.ico" type="image/x-icon">
+  </header>
+
+  <div class="centered-container">
+    <form id="postForm" action="/admin/posts/create" method="POST" class="form-container">
+      <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
+      <input type="hidden" name="fromPage" value="{{.CurrentPage}}">
+
+      {{if .Error}}
+      <div class="error-message">
+        {{.Error}}
+      </div>
+      {{end}}
+
+      <div class="counter" id="title-counter"></div>
+
+      <div class="form-group">
+        <label>Заголовок:</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <div class="counter" id="content_description-counter"></div>
+
+      <div class="form-group">
+        <label>
+          Краткое описание:
+          <span class="info-icon" title="Поддерживается Markdown-разметка">&#9432;</span>
+        </label>
+        <textarea id="content_description" name="content_description" rows="4"></textarea>
+      </div>
+
+      <div class="counter" id="content-counter"></div>
+
+      <div class="form-group">
+        <label>
+          Текст:
+          <span class="info-icon" title="Поддерживается Markdown-разметка">&#9432;</span>
+        </label>
+        <textarea id="content" name="content" rows="10" required></textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="submit-button">Создать пост</button>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Конфигурация полей и их лимитов
+        const fieldsConfig = {
+            title: { max: 100 },
+            content_description: { max: 200 },
+            content: { max: 5000 }
+        };
+
+        // Инициализация элементов
+        const formFields = {};
+        Object.keys(fieldsConfig).forEach(fieldName => {
+            formFields[fieldName] = {
+                element: document.getElementById(fieldName),
+                counter: document.getElementById(`${fieldName}-counter`)
+            };
+        });
+
+        // Функция обновления счетчика
+        const updateCounter = (fieldName) => {
+            const config = fieldsConfig[fieldName];
+            const field = formFields[fieldName];
+            if (field.element && field.counter) {
+                const length = field.element.value.length;
+                field.counter.textContent = `${length}/${config.max}`;
+            }
+        };
+
+        // Восстановление данных
+        Object.keys(fieldsConfig).forEach(fieldName => {
+            const savedValue = localStorage.getItem(fieldName);
+            if (savedValue && formFields[fieldName].element) {
+                formFields[fieldName].element.value = savedValue;
+                updateCounter(fieldName);
+            }
+        });
+
+        // Слушатели ввода
+        Object.keys(fieldsConfig).forEach(fieldName => {
+            formFields[fieldName].element.addEventListener('input', () => {
+                localStorage.setItem(fieldName, formFields[fieldName].element.value);
+                updateCounter(fieldName);
+            });
+        });
+
+        // Очистка при успешной отправке
+        document.getElementById('postForm').addEventListener('submit', function() {
+            Object.keys(fieldsConfig).forEach(fieldName => {
+                localStorage.removeItem(fieldName);
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>
